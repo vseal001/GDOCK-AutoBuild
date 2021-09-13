@@ -35,8 +35,8 @@ echo '下载AdGuard Home'
 svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ../diy/luci-app-adguardhome
 svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ../diy/adguardhome
 
-#echo 'JD script'
-#git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diy/luci-app-jd-dailybonus
+echo 'JD script'
+git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diy/luci-app-jd-dailybonus
 
 echo '集成diy目录'
 ln -s ../../diy ./package/openwrt-packages
