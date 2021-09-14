@@ -15,7 +15,7 @@ sed -i 's/config internal themes/config internal themes\n    option Argon  \"\/l
 
 
 echo '删除旧版argon,链接新版'
-rm -rf ./package/lean/luci-theme-argon
+rm -rf package/lean/luci-theme-argon
 git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon ../diy/luci-theme-argon
 git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config ../diy/luci-app-argon-config
 ln -s ../../../luci-theme-argon ./package/lean/
@@ -45,8 +45,8 @@ git clone https://github.com/destan19/OpenAppFilter.git ../diy/luci-app-oaf
 #wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diy/luci-app-frps-arm/root/usr/bin/frps
 
 echo '使用自定义frp编译脚本'
-mv package/lean/frp/Makefile package/lean/frp/Makefile.bak
-cp -r ../diy/frp/Makefile package/lean/frp/Makefile
+rm -r package/lean/frp/Makefile
+cp -r ../frp/Makefile package/lean/frp/Makefile
 
 echo '集成diy目录'
 ln -s ../../diy ./package/openwrt-packages

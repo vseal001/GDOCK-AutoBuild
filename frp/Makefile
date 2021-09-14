@@ -12,8 +12,8 @@ PKG_VERSION:=0.37.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/vseal001/my-frp/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=30d03e6c530554253eb5c1e77289760c826d2ef47c3dff9409e2179cc262b5eb
+PKG_SOURCE_URL:=https://codeload.github.com/vseal001/frp/tar.gz/v$(PKG_VERSION)?
+PKG_HASH:=e2c1f93d504ae3bbe3407aaec43efa5c5f09b6d1a35306b58808c4f36b53f396
 
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
@@ -23,8 +23,8 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
-GO_PKG:=github.com/vseal001/my-frp
-GO_PKG_BUILD_PKG:=github.com/vseal001/my-frp/cmd/...
+GO_PKG:=github.com/vseal001/frp
+GO_PKG_BUILD_PKG:=github.com/vseal001/frp/cmd/...
 
 GO_PKG_LDFLAGS:=-s -w
 
@@ -34,7 +34,7 @@ include $(TOPDIR)/feeds/packages/lang/golang/golang-package.mk
 define frp/templates
   define Package/$(1)
     TITLE:=A fast reverse proxy ($(1))
-    URL:=https://github.com/vseal001/my-frp
+    URL:=https://github.com/vseal001/frp
     SECTION:=net
     CATEGORY:=Network
     SUBMENU:=Web Servers/Proxies
