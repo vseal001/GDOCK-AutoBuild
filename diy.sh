@@ -40,8 +40,13 @@ git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diy/luci-app-jd-d
 
 echo '应用过滤插件'
 git clone https://github.com/destan19/OpenAppFilter.git ../diy/luci-app-oaf
-echo '更新最新frps运行脚本'
-wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diy/luci-app-frps-arm/root/usr/bin/frps
+
+#echo '更新最新frps运行脚本'
+#wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diy/luci-app-frps-arm/root/usr/bin/frps
+
+echo '使用自定义frp编译脚本'
+mv package/lean/frp/Makefile package/lean/frp/Makefile.bak
+cp -r ../diy/frp/Makefile package/lean/frp/Makefile
 
 echo '集成diy目录'
 ln -s ../../diy ./package/openwrt-packages
@@ -49,5 +54,5 @@ ln -s ../../diy ./package/openwrt-packages
 #echo '首页增加CPU频率动态显示'
 #cp -f ../diy/mod-index.htm ./feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
 
-#echo 'enable magic'
-#echo 'src-git helloworld https://github.com/fw876/helloworld'>>./feeds.conf.default
+echo 'enable magic'
+echo 'src-git helloworld https://github.com/fw876/helloworld'>>./feeds.conf.default
