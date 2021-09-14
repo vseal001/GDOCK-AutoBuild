@@ -14,11 +14,11 @@ sed -i 's/config internal themes/config internal themes\n    option Argon  \"\/l
 #sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 
-#echo '删除旧版argon,链接新版'
-#rm -rf ./package/lean/luci-theme-argon
-#git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon ../diy/luci-theme-argon
-#git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config ../diy/luci-app-argon-config
-#ln -s ../../../luci-theme-argon ./package/lean/
+echo '删除旧版argon,链接新版'
+rm -rf ./package/lean/luci-theme-argon
+git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon ../diy/luci-theme-argon
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config ../diy/luci-app-argon-config
+ln -s ../../../luci-theme-argon ./package/lean/
 
 echo '修改wifi名称'
 sed -i 's/OpenWrt/G-DOCK/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
@@ -30,13 +30,18 @@ cp -f ../banner package/base-files/files/etc/
 echo '下载ServerChan'
 git clone https://github.com/tty228/luci-app-serverchan ../diy/luci-app-serverchan
 
-echo '下载AdGuard Home'
+#echo '下载AdGuard Home'
 #svn co https://github.com/Lienol/openwrt/trunk/package/diy/luci-app-adguardhome ../diy/luci-app-adguardhome 
-svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ../diy/luci-app-adguardhome
-svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ../diy/adguardhome
+#svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ../diy/luci-app-adguardhome
+#svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ../diy/adguardhome
 
 echo 'JD script'
 git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diy/luci-app-jd-dailybonus
+
+echo '应用过滤插件'
+git clone https://github.com/destan19/OpenAppFilter.git ../diy/luci-app-oaf
+echo '更新最新frps运行脚本'
+wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diy/luci-app-frps-arm/root/usr/bin/frps
 
 echo '集成diy目录'
 ln -s ../../diy ./package/openwrt-packages
