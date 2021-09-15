@@ -21,6 +21,7 @@ echo '删除旧版主题文件,链接新版'
 rm -rf package/lean/luci-theme-argon
 rm -rf package/lean/luci-theme-atmaterial
 cp -rf ../diyTheme/luci-theme-argon package/lean/luci-theme-argon
+cp -rf ../diyTheme/luci-app-argon-config package/lean/luci-app-argon-config
 cp -rf ../diyTheme/luci-theme-atmaterial package/lean/luci-theme-atmaterial
 
 
