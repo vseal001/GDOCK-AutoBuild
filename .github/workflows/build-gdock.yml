@@ -52,6 +52,8 @@ jobs:
       run: |
         git clone https://github.com/coolsnowwolf/lede lede
 
+    - name: enable magic
+      run: cd lede && echo 'src-git helloworld https://github.com/fw876/helloworld'>>./feeds.conf.default
       
     - name: Update feeds
       run: cd lede && ./scripts/feeds update -a

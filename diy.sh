@@ -7,52 +7,59 @@ sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generat
 echo '修改时区'
 sed -i "s/'UTC'/'CST-8'\n        set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
 
-echo '修改默认主题'
-sed -i 's/config internal themes/config internal themes\n    option Argon  \"\/luci-static\/argon\"/g' feeds/luci/modules/luci-base/root/etc/config/luci
+echo '修改默认主题为Argon'
+sed -i 's/option mediaurlbase \/luci-static\/bootstrap/option mediaurlbase \/luci-static\/argon/g' ./feeds/luci/modules/luci-base/root/etc/config/luci
+sed -i 's/config internal themes/config internal themes\n    option Argon  \"\/luci-static\/argon\"/g' ./feeds/luci/modules/luci-base/root/etc/config/luci
 
 #echo '去除默认bootstrap主题'
 #sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 
-echo '删除旧版argon,链接新版'
+echo '删除旧版主题文件,链接新版'
 rm -rf package/lean/luci-theme-argon
-git clone --depth=1 -b 18.06 https://github.com/jerrykuku/luci-theme-argon ../diy/luci-theme-argon
-git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config ../diy/luci-app-argon-config
-ln -s ../../../luci-theme-argon ./package/lean/
+git clone --depth=1 -b main https://github.com/vseal001/openwrt-theme-main/ ../diyTheme/
+#mv ../diyTheme/
+#git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config ../diy/luci-app-argon-config
+cp -r ../diyTheme/luci-theme-argon-mod package/lean/luci-theme-argon
+cp -r ../diyTheme/luci-theme-edge-mod package/lean/luci-theme-edge
+cp -r ../diyTheme/luci-theme-ifit-mod package/lean/luci-theme-ifit
+cp -r ../diyTheme/luci-theme-Night-mod package/lean/luci-theme-Night
 
-echo '修改wifi名称'
+echo '修改wifi名称及国家区域'
 sed -i 's/OpenWrt/G-DOCK/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/US/CN/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 echo '修改banner'
 rm -rf package/base-files/files/etc/banner
 cp -f ../banner package/base-files/files/etc/
 
 echo '下载ServerChan'
-git clone https://github.com/tty228/luci-app-serverchan ../diy/luci-app-serverchan
+git clone https://github.com/tty228/luci-app-serverchan ../diyApp/luci-app-serverchan
 
 #echo '下载AdGuard Home'
-#svn co https://github.com/Lienol/openwrt/trunk/package/diy/luci-app-adguardhome ../diy/luci-app-adguardhome 
-#svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ../diy/luci-app-adguardhome
-#svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ../diy/adguardhome
+#svn co https://github.com/Lienol/openwrt/trunk/package/diy/luci-app-adguardhome ../diyApp/luci-app-adguardhome 
+#svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ../diyApp/luci-app-adguardhome
+#svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ../diyApp/adguardhome
 
-echo 'JD script'
-git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diy/luci-app-jd-dailybonus
+echo '使用最新JD script'
+rm -rf package/lean/luci-app-jd-dailybonus
+git clone https://github.com/Cathgao/luci-app-jd-dailybonus ../diyApp/luci-app-jd-dailybonus
 
 echo '应用过滤插件'
-git clone https://github.com/destan19/OpenAppFilter.git ../diy/luci-app-oaf
+git clone https://github.com/destan19/OpenAppFilter.git ../diyApp/luci-app-oaf
 
 #echo '更新最新frps运行脚本'
-#wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diy/luci-app-frps-arm/root/usr/bin/frps
+#wget https://github.com/vseal001/my-frp/releases/download/Tages/frps_linux_arm -o ../diyApp/luci-app-frps-arm/root/usr/bin/frps
 
 echo '使用自定义frp编译脚本'
 rm -r package/lean/frp/Makefile
-cp -r ../frp/Makefile package/lean/frp/Makefile
+cp -r ../diyConfig/frp/Makefile package/lean/frp/Makefile
 
-echo '集成diy目录'
-ln -s ../../diy ./package/openwrt-packages
+echo '集成diyApp目录'
+ln -s ../../diyApp package/openwrt-packages
 
 #echo '首页增加CPU频率动态显示'
-#cp -f ../diy/mod-index.htm ./feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+#cp -f ../diyApp/mod-index.htm ./feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
 
-echo 'enable magic'
-echo 'src-git helloworld https://github.com/fw876/helloworld'>>./feeds.conf.default
+#echo 'enable magic'
+#echo 'src-git helloworld https://github.com/fw876/helloworld'>>./feeds.conf.default
