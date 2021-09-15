@@ -5,19 +5,19 @@
 
 =============================================
 
-本仓库每天UTC 20:00自动拉取lean最新源码编译，可直接在action中下载最新固件
+本仓库自动拉取lean最新源码编译，检测有更新后,可直接在action中下载最新固件
 
 固件具体更新内容移步到 https://github.com/coolsnowwolf/lede 查看
 
-固件的默认管理地址为`192.168.5.1`，密码默认`password`
+固件的默认管理地址为`192.168.12.1`，密码默认`password`
 
 =============================================
 
 如果你只想使用固件,可以在本项目的actions下下载最新编译的固件.
 
 <p>
-    <a href="https://github.com/Cathgao/GDOCK-Cath/actions">
-            <img src="https://github.com/Cathgao/GDOCK-Cath/workflows/Build%20G-DOCK/badge.svg"/>
+    <a href="https://github.com/vseal001/GDOCK-AutoBuild/actions">
+            <img src="https://github.com/vseal001/GDOCK-AutoBuild/workflows/Build%20G-DOCK/badge.svg"/>
         </a>
 </p>
 
@@ -29,7 +29,7 @@
 2.gdockfull128.config
 编辑自定义配置文件.
 
-3.以上修改完后push一下,即可自动编译固件
+3.手动点击Run workflow,即可自动编译固件;后面会定期检测官方LEDE库,自行编译更新的!
 
 ==============================================
 
@@ -38,6 +38,7 @@
 ==============================================
 
 部分脚本内容参考以下项目特此感谢:
+https://github.com/Cathgao/GDOCK-Cath
 
 https://github.com/P3TERX/Actions-OpenWrt/
 
